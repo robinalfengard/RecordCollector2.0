@@ -24,18 +24,20 @@ public class RecordController {
     @Autowired
     RecordService recordService;
     private final UserRepository userRepository;
+    private final RecordRepository recordRepository;
 
     @GetMapping("/{id}/records")
     public ResponseEntity<List<Record>> getRecords(@PathVariable Long id){
         return recordService.getRecords(id);
     }
 
-/*    @PostMapping("/savetest/{id}/{albumname}/{artist}")
-    public ResponseEntity<Record> saveTest(@PathVariable Long id, @PathVariable String albumname, @PathVariable String artist){
-       return recordService.savetest(id, albumname, artist);
-    }*/
+    @GetMapping("/{id}")
+    public ResponseEntity<Record> getRecord(@PathVariable Long id){
+        return ResponseEntity.ok( recordRepository.findById(id).get());
+    }
 
 
+    //save record
     @PostMapping("/save/{id}/{albumName}/{artist}/{thumb}/{idFromApi}/{released}/{country}/{genre}")
      public ResponseEntity<Record> save(@PathVariable Long id, @PathVariable String albumName, @PathVariable String artist, @PathVariable String thumb,@PathVariable String idFromApi,@PathVariable String released,@PathVariable String country,@PathVariable String genre){
         return recordService.save(id, albumName, artist, thumb, idFromApi, released, country, genre);
@@ -43,18 +45,18 @@ public class RecordController {
 
         // Don't work
     @PostMapping("/savebody")
-    public ResponseEntity<String> saveBody(Record record){
-        recordService.save(record.getUser().getId(), record.getAlbumName(), record.getArtist(), record.getThumb(), record.getIdFromApi(), record.getReleased(), record.getCountry(), record.getGenre());
+    public ResponseEntity<String> saveBody(@RequestBody Record record){
+        recordService.saveByBody(record);
         return ResponseEntity.ok("Record saved successfully");
     }
 
+    // delete record
     @DeleteMapping("/delete/{id}/{idFromApi}")
     ResponseEntity<String> deleteRecord(@PathVariable Long id, @PathVariable String idFromApi){
         return recordService.deleteRecord(id, idFromApi);
     }
 
-
-    // not found
+   // check if record is in collection
     @GetMapping("/check/{id}/{idFromApi}")
     public ResponseEntity<Boolean> isPresent(@PathVariable Long id,@PathVariable String idFromApi){
         return recordService.isPresent(id, idFromApi);

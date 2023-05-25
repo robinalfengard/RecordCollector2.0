@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -38,10 +39,14 @@ public class RecordService {
         return ResponseEntity.ok(recordRepository.save(new Record(userRepository.findById(id).get(), albumName, artist, thumb, idFromApi, released, country, genre)));
     }
 
-    // Test Save Record not used
-/*    public ResponseEntity<Record> savetest(Long id, String albumName, String artist) {
-        return ResponseEntity.ok(recordRepository.save(new Record(userRepository.findById(id).get(), albumName, artist)));
-    }*/
+    public ResponseEntity<String> saveByBody(Record record){
+        Long userId = Long.parseLong(record.getUserIdForConstructor());
+        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
+        Record newRecord = new Record(user, record.getAlbumName(), record.getArtist(), record.getThumb(), record.getIdFromApi(), record.getReleased(), record.getCountry(), record.getGenre());
+        recordRepository.save(newRecord);
+        return  ResponseEntity.ok("Record saved successfully");
+    }
+
 
     // Delete Record
     public ResponseEntity<String> deleteRecord(Long id, String idFromApi){
@@ -57,7 +62,8 @@ public class RecordService {
         return ResponseEntity.notFound().build();
     }
 
-    // Is record saved
+
+    // Check if record saved
     public ResponseEntity<Boolean> isPresent(Long userId, String idFromApi){
         List<Record> userRecords = recordRepository.findAllByUserId(userId);
         boolean isPresent = false;
@@ -68,7 +74,6 @@ public class RecordService {
             }
         }
         return ResponseEntity.ok(isPresent);
-
     }
 
 

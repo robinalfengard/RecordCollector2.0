@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Table(name = "RECORD")
 public class Record   {
 
-
     @Column(name = "ID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +26,9 @@ public class Record   {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     User user;
+
+    @Column(name ="USER_ID_FOR_CONSTRUCTOR")
+    String userIdForConstructor;
 
     @Column(name = "ALBUM_NAME")
     String albumName;
@@ -59,6 +61,18 @@ public class Record   {
         this.genre = genre;
     }
 
+    // to simplify JSON responses
+    public Record(String userIdForConstructor, String albumName, String artist, String thumb, String idFromApi, String released, String country, String genre) {
+        this.userIdForConstructor = userIdForConstructor;
+        this.albumName = albumName;
+        this.artist = artist;
+        this.thumb = thumb;
+        this.idFromApi = idFromApi;
+        this.released = released;
+        this.country = country;
+        this.genre = genre;
+    }
+
 
 
 
@@ -67,6 +81,10 @@ public class Record   {
         this.albumName = albumName;
         this.artist = artist;
     }
+
+/*    public User extractUser(Long id){
+
+    }*/
 
 
 
