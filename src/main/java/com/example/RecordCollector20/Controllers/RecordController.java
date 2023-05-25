@@ -43,7 +43,7 @@ public class RecordController {
         return recordService.save(id, albumName, artist, thumb, idFromApi, released, country, genre);
         }
 
-        // Don't work
+    // save record by body
     @PostMapping("/savebody")
     public ResponseEntity<String> saveBody(@RequestBody Record record){
         recordService.saveByBody(record);

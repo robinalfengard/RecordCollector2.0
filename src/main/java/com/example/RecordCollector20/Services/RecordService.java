@@ -34,11 +34,12 @@ public class RecordService {
         return ResponseEntity.noContent().build();
     }
 
-    // Save Record
+    // Save Record OLD
     public ResponseEntity<Record> save(Long id, String albumName, String artist, String thumb, String idFromApi, String released, String country, String genre ){
         return ResponseEntity.ok(recordRepository.save(new Record(userRepository.findById(id).get(), albumName, artist, thumb, idFromApi, released, country, genre)));
     }
 
+    // Save record by sending a record body with JSON
     public ResponseEntity<String> saveByBody(Record record){
         Long userId = Long.parseLong(record.getUserIdForConstructor());
         User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -58,7 +59,6 @@ public class RecordService {
                    return new ResponseEntity<>("Record with ID " + id + " has been deleted.", HttpStatus.OK);
                }
            }
-
         return ResponseEntity.notFound().build();
     }
 

@@ -27,7 +27,7 @@ public class Record   {
     @JoinColumn(name = "USER_ID")
     User user;
 
-    @Column(name ="USER_ID_FOR_CONSTRUCTOR")
+    @Transient
     String userIdForConstructor;
 
     @Column(name = "ALBUM_NAME")
