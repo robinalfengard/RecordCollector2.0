@@ -1,11 +1,13 @@
 package com.example.RecordCollector20.Entities;
+import com.example.RecordCollector20.Repositories.UserRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Optional;
+
 
 
 @Data
@@ -15,6 +17,8 @@ import java.util.Optional;
 @Entity
 @Table(name = "RECORD")
 public class Record   {
+
+
     @Column(name = "ID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,38 +32,44 @@ public class Record   {
     String albumName;
     @Column(name = "ARTIST")
     String artist;
-    @Column(name = "SMALL_IMG_URL")
-    String smallImageUrl;
-    @Column(name = "MEDIUM_IMG_URL")
-    String mediumImageUrl;
-
-    @Column(name = "LARGE_IMG_URL")
-    String largeImageUrl;
-
-    @Column(name = "URL_TO_HOMEPAGE")
-    String urlToHomepage;
+    @Column(name = "THUMB")
+    String thumb;
 
     @Column(name = "ID_FROM_API")
     String idFromApi;
 
-    @Column(name = "STREAMABLE")
-    String streamable;
+    @Column(name = "RELEASED")
+    String released;
 
-    @Column(name = "YEAR")
-    String year;
+    @Column(name = "COUNTRY")
+    String country;
+
+    @Column(name = "GENRE")
+    String genre;
 
 
-    public Record(User user, String name, String artist, String smallImageUrl, String mediumImageUrl, String largeImageUrl, String urlToHomepage, String idFromApi, String streamable) {
+    public Record(User user, String albumName, String artist, String thumb, String idFromApi, String released, String country, String genre) {
         this.user = user;
-        this.albumName = name;
+        this.albumName = albumName;
         this.artist = artist;
-        this.smallImageUrl = smallImageUrl;
-        this.mediumImageUrl = mediumImageUrl;
-        this.largeImageUrl = largeImageUrl;
-        this.urlToHomepage = urlToHomepage;
+        this.thumb = thumb;
         this.idFromApi = idFromApi;
-        this.streamable = streamable;
+        this.released = released;
+        this.country = country;
+        this.genre = genre;
     }
+
+
+
+
+    public Record(User user, String albumName, String artist){
+        this.user = user;
+        this.albumName = albumName;
+        this.artist = artist;
+    }
+
+
+
 }
 
 

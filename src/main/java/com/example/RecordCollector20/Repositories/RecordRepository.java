@@ -11,4 +11,8 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
 
 
     List<Record> findAllByUserId(Long id);
+
+
+
+
 }

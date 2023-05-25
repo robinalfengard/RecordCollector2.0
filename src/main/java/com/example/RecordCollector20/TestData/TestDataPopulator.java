@@ -1,4 +1,4 @@
-/*package com.example.RecordCollector20.TestData;
+package com.example.RecordCollector20.TestData;
 
 import com.example.RecordCollector20.Entities.Record;
 import com.example.RecordCollector20.Repositories.RecordRepository;
@@ -23,7 +23,7 @@ public class TestDataPopulator {
 
     @PostConstruct
     public void populateTestData(){
-        Record test1 = new Record(userRepository.findById(14L).get(), "Love Gun", "Kiss", "123", "123", "123", "123", "123", "123");
+/*        Record test1 = new Record(userRepository.findById(14L).get(), "Love Gun", "Kiss", "123", "123", "123", "123", "123", "123");
         Record test2 = new Record(userRepository.findById(14L).get(), "Destroyer", "Kiss", "123", "123", "123", "123", "123", "123");
         Record test3 = new Record(userRepository.findById(2L).get(), "Black Album", "Metallica", "123", "123", "123", "123", "123", "123");
         Record test4 = new Record(userRepository.findById(1L).get(), "Love Gun", "Kiss", "123", "123", "123", "123", "123", "123");
@@ -31,7 +31,9 @@ public class TestDataPopulator {
         recordRepository.save(test1);
         recordRepository.save(test2);
         recordRepository.save(test3);
-        recordRepository.save(test4);
+        recordRepository.save(test4);*/
+      /*  Record test5 = new Record(userRepository.findById(14L).get(), "Cool TestSkiva", "TestArtist", "test", "test", "test", "test", "test");
+        recordRepository.save(test5);*/
 
     }
-}*/
+}
